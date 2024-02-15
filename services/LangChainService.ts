@@ -114,6 +114,7 @@ export class LangChainService {
     // If does not exist our data, generate and store
     const fullpath = path.resolve("public/data");
     console.log("--------------path:", fullpath);
+    console.log("--------------path2:", process.cwd() + "/public/data");
     const documents = await this.loadDocuments({
       path: fullpath,
     });
