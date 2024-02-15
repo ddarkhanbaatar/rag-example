@@ -2,6 +2,9 @@ import { NextResponse } from "next/server";
 import { Message } from "@/types/message";
 import { stack9Chain } from "@/utils/stack9-chain";
 
+export const maxDuration = 30;
+export const dynamic = 'force-dynamic';
+
 export async function POST(request: Request) {
   const body = await request.json();
   const question: string = body.query;
