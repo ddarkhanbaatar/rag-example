@@ -7,6 +7,7 @@ import { MemoryVectorStore } from "langchain/vectorstores/memory";
 import { GoogleGenerativeAIEmbeddings } from "@langchain/google-genai";
 import { TaskType } from "@google/generative-ai";
 import { RunnableSequence } from "@langchain/core/runnables";
+import path from "node:path";
 
 export class LangChainService {
   private collectionName = "stack9-rag";
@@ -111,9 +112,10 @@ export class LangChainService {
     // }
 
     // If does not exist our data, generate and store
-    console.log("--------------path:", process.cwd() + "/app/data");
+    const fullpath = path.resolve("public/data");
+    console.log("--------------path:", fullpath);
     const documents = await this.loadDocuments({
-      path: process.cwd() + "/app/data",
+      path: fullpath,
     });
     const splittedDocuments = await this.splitDocuments({
       data: documents,
