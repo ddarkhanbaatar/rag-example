@@ -8,6 +8,7 @@ import { GoogleGenerativeAIEmbeddings } from "@langchain/google-genai";
 import { TaskType } from "@google/generative-ai";
 import { RunnableSequence } from "@langchain/core/runnables";
 import path from "node:path";
+import { OpenAIEmbeddings } from "@langchain/openai";
 
 export class LangChainService {
   private collectionName = "stack9-rag";
@@ -45,10 +46,14 @@ export class LangChainService {
   };
 
   public getEmbeddngs = () => {
-    return new GoogleGenerativeAIEmbeddings({
-      modelName: "embedding-001", // 768 dimensions
-      taskType: TaskType.RETRIEVAL_DOCUMENT,
-      apiKey: "AIzaSyBIPrsCFHX4jzEbqC1j0NyU7fO4iUL9LLQ",
+    // return new GoogleGenerativeAIEmbeddings({
+    //   modelName: "embedding-001", // 768 dimensions
+    //   taskType: TaskType.RETRIEVAL_DOCUMENT,
+    //   apiKey: "AIzaSyBIPrsCFHX4jzEbqC1j0NyU7fO4iUL9LLQ",
+    // });
+
+    return new OpenAIEmbeddings({
+      openAIApiKey: "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",
     });
   };
 
