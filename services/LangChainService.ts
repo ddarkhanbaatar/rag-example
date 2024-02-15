@@ -12,12 +12,16 @@ export class LangChainService {
   private collectionName = "stack9-rag";
   private url = "http://localhost:8000";
   // Read PDF and JSON documents
-  public loadDocuments = async ({ path = "./public/data" }: { path?: string }) => {
+  public loadDocuments = async ({
+    path = "./public/data",
+  }: {
+    path?: string;
+  }) => {
     const loader = new DirectoryLoader(path, {
       ".json": (p) => new JSONLoader(p),
       ".pdf": (p) => new PDFLoader(p),
     });
-    const docs = await loader.load();    
+    const docs = await loader.load();
     return docs;
   };
 
@@ -107,7 +111,10 @@ export class LangChainService {
     // }
 
     // If does not exist our data, generate and store
-    const documents = await this.loadDocuments({ path: "./public/data" });
+    console.log("--------------path:", process.cwd() + "/app/data");
+    const documents = await this.loadDocuments({
+      path: process.cwd() + "/app/data",
+    });
     const splittedDocuments = await this.splitDocuments({
       data: documents,
       chunkSize: 1536,
