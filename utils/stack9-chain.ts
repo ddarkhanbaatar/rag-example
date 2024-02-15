@@ -1,6 +1,9 @@
 import { HumanMessage, AIMessage } from "@langchain/core/messages";
 
-import { ChatPromptTemplate, MessagesPlaceholder } from "@langchain/core/prompts";
+import {
+  ChatPromptTemplate,
+  MessagesPlaceholder,
+} from "@langchain/core/prompts";
 import { ChatOpenAI } from "@langchain/openai";
 import {
   RunnablePassthrough,
@@ -29,7 +32,7 @@ async function initChain() {
   const llmService = new LangChainService();
 
   const vectorstore = await llmService.getVectorStore();
-  const retriever = vectorstore.asRetriever();  
+  const retriever = vectorstore.asRetriever();
 
   const answerGenerationChainPrompt = ChatPromptTemplate.fromMessages([
     ["system", ANSWER_CHAIN_SYSTEM_TEMPLATE],
@@ -48,7 +51,7 @@ async function initChain() {
       new AIMessage("Fine, thank you!"),
     ],
   });
- 
+
   const rephraseQuestionChainPrompt = ChatPromptTemplate.fromMessages([
     ["system", REPHRASE_QUESTION_SYSTEM_TEMPLATE],
     new MessagesPlaceholder("history"),
@@ -63,6 +66,7 @@ async function initChain() {
     new ChatOpenAI({
       temperature: 0.1,
       modelName: "gpt-3.5-turbo-1106",
+      openAIApiKey: "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",
     }),
     new StringOutputParser(),
   ]);
@@ -75,7 +79,10 @@ async function initChain() {
       context: llmService.documentRetrievalChain({ retriever }),
     }),
     answerGenerationChainPrompt,
-    new ChatOpenAI({ modelName: "gpt-3.5-turbo" }),
+    new ChatOpenAI({
+      modelName: "gpt-3.5-turbo",
+      openAIApiKey: "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",
+    }),
     new StringOutputParser(),
   ]);
 
@@ -88,7 +95,6 @@ async function initChain() {
     inputMessagesKey: "question",
   });
 
- 
   return finalRetrievalChain;
 }
 
