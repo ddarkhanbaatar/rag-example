@@ -1,0 +1,22 @@
+version: "3.8"
+services:
+  nextjs:
+    build:
+      context: .
+      dockerfile: nextjs.dockerfile
+    volumes:
+      - ./:/app/
+    ports:
+      - 3000:3000
+    stdin_open: true
+    command: npm run dev 
+
+volumes:
+  index_data:
+    driver: local
+  backups:
+    driver: local
+
+networks:
+  net:
+    driver: bridge
