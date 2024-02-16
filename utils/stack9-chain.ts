@@ -66,7 +66,6 @@ async function initChain() {
     new ChatOpenAI({
       temperature: 0.1,
       modelName: "gpt-3.5-turbo-1106",
-      openAIApiKey: "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",
     }),
     new StringOutputParser(),
   ]);
@@ -81,7 +80,6 @@ async function initChain() {
     answerGenerationChainPrompt,
     new ChatOpenAI({
       modelName: "gpt-3.5-turbo",
-      openAIApiKey: "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",
     }),
     new StringOutputParser(),
   ]);

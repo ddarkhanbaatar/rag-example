@@ -49,12 +49,9 @@ export class LangChainService {
     // return new GoogleGenerativeAIEmbeddings({
     //   modelName: "embedding-001", // 768 dimensions
     //   taskType: TaskType.RETRIEVAL_DOCUMENT,
-    //   apiKey: "AIzaSyBIPrsCFHX4jzEbqC1j0NyU7fO4iUL9LLQ",
     // });
 
-    return new OpenAIEmbeddings({
-      openAIApiKey: "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",
-    });
+    return new OpenAIEmbeddings();
   };
 
   private convertDocsToString = (documents: Document[]): string => {
@@ -118,8 +115,6 @@ export class LangChainService {
 
     // If does not exist our data, generate and store
     const fullpath = path.resolve("public/data");
-    console.log("--------------path:", fullpath);
-    console.log("--------------path2:", process.cwd() + "/public/data");
     const documents = await this.loadDocuments({
       path: fullpath,
     });
